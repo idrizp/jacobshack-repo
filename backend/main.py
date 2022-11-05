@@ -5,6 +5,7 @@ app = Flask(__name__)
 import auth_endpoints
 import endpoint
 import middleware.auth_middleware
+
 from db import db
 from barcode import checker
 
@@ -19,7 +20,7 @@ def entry():
     # getting input with image = image in HTML form
     image = request.files.get("image")
     # calling the save_barcode() from check and using it 
-    if checker.save_barcode(user_id, image, db.get_db()):
+    if checker.save_barcode(g.user.user_id, image, db.get_db()):
         return jsonify({"success": "You have successfully added an entry."}), 200
     return jsonify({ "error": "Couldn't accept barcode." }), 400
 
