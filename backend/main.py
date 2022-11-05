@@ -1,4 +1,5 @@
 from flask import Flask, g, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
 import auth_endpoints
@@ -8,6 +9,8 @@ from db import db
 from barcode import checker
 
 app = Flask(__name__)
+
+CORS(app)
 
 # done by: uncrownedking1
 # route to get a name and image as input
@@ -26,3 +29,4 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
+

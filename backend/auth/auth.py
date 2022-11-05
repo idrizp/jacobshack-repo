@@ -30,14 +30,14 @@ def create_user(username: str, password: str, connection: Connection) -> Tuple[U
 
 def login(username: str, password: str, connection: Connection) -> str | None:
     with connection:
-        row = db.query_db(connection, "SELECT FROM users(user_id, password) WHERE LOWER(username)=LOWER(?)", (username), one=True)
+        row = db.query_db(connection, "SELECT user_id, password FROM users WHERE username=?", (username,), one=True)
         if row == None:
             return None
-        if not bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8")):
+        if not bcrypt.checkpw(password.encode("utf-8"), row[1]):
             return None
         return jwt.encode({
-            "username": row["username"],
-            "user_id": row["user_id"],
+            "username": row[1].decode("utf-8"),
+            "user_id": row[0],
         }, 
         JWT_SECRET, 
         algorithm="HS256")

@@ -9,7 +9,7 @@ def get_top_scores(database: sqlite3.Connection, page: int):
                 LIMIT 10
                 OFFSET ? * 10
             """,
-            (page),
+            (page,),
             one=False
         )
         return rows

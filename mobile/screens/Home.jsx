@@ -9,7 +9,7 @@ const Home = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
-          <Text style={styles.title}>Welcome to Greenboard.</Text>
+          <Text style={styles.title}>Welcome to GreenBoard.</Text>
     
           <Text style={styles.description}>
             To get started, create an account on our platform.
@@ -20,7 +20,9 @@ const Home = () => {
             >
               <Text style={ButtonStyles.buttonText}>Sign Up</Text>
             </Pressable>
-            <Pressable style={ButtonStyles.button}>
+            <Pressable style={ButtonStyles.button}
+             onPress={() => navigation.navigate('Login')}
+            >
               <Text style={ButtonStyles.buttonText}>Sign In</Text>
             </Pressable>
           </View>

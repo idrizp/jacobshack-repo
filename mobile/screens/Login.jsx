@@ -1,15 +1,20 @@
-import { View, Text, StyleSheet, SafeAreaView, TextInput } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, SafeAreaView, TextInput, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import { ContainerStyles } from '../styles/ContainerStyles';
 import { ButtonStyles } from '../styles/ButtonStyles';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import {  } from '../api/request';
+import { logIn, register } from '../api/authentication';
+import { useNavigation } from '@react-navigation/native';
+import { ColorStyles } from '../styles/ColorStyles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Register = () => {
+const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const navigation = useNavigation();
+    const [success, setSuccess] = useState(undefined);
   return (
     <SafeAreaView style={styles.background}>
-        <View style={styles.container}>
-            <Text style={styles.title}>Sign into your account.</Text>
-        </View>
 
         <View style={
             {
@@ -18,31 +23,62 @@ const Register = () => {
                 ...ContainerStyles.full,
             }
         }>
+            <View style={styles.container}>
+                <Text style={styles.title}>Sign into your account.</Text>
+            </View>
             <Text style={styles.label}>Username</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Username"
                 autoCapitalize='none'
+                onChangeText={text => setUsername(text)}
                 autoCorrect={false}
             />
             <Text style={styles.label}>Password</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Password"
+                onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
-            <Pressable>
+            <Pressable onPress={() => {
+                if (username === "" && password === "") {
+                    return;
+                }
+                logIn(username, password).then(async (response) => {
+                    if (response.status === 200) {
+                        setSuccess(true);
+                        await AsyncStorage.setItem("token", response.data.token);
+                        navigation.navigate('Home');
+                    }
+                }).catch(error => {
+                    if (error.response.status === 401) {
+                        setSuccess(false);
+                    }
+                });
+            }}>
                 <View style={{...ButtonStyles.button, ...ContainerStyles.spaced}}>
-                    <Text style={ButtonStyles.buttonText}>Log In</Text>
+                    <Text style={ButtonStyles.buttonText}>Sign In</Text>
                 </View>
             </Pressable>
+            <Pressable onPress={() => navigation.navigate('Register')}>
+                <View style={{...ButtonStyles.button}}>
+                    <Text style={ButtonStyles.buttonText}>Don't have an account?</Text>
+                </View>
+            </Pressable>
+
+            { success === false && 
+            <Text style={ColorStyles.error}>
+                Incorrect password.
+            </Text>
+            }
         </View>
 
     </SafeAreaView>
   )
 }
 
-export default Register;
+export default Login;
 
 // define style
 const styles = StyleSheet.create({

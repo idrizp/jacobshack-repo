@@ -1,10 +1,17 @@
-import { View, Text, StyleSheet, SafeAreaView, TextInput } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, SafeAreaView, TextInput, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import { ContainerStyles } from '../styles/ContainerStyles';
 import { ButtonStyles } from '../styles/ButtonStyles';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import {  } from '../api/request';
+import { register } from '../api/authentication';
+import { useNavigation } from '@react-navigation/native';
+import { ColorStyles } from '../styles/ColorStyles';
 
 const Register = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const navigation = useNavigation();
+    const [success, setSuccess] = useState(undefined);
   return (
     <SafeAreaView style={styles.background}>
 
@@ -23,19 +30,48 @@ const Register = () => {
                 style={styles.input}
                 placeholder="Username"
                 autoCapitalize='none'
+                onChangeText={text => setUsername(text)}
                 autoCorrect={false}
             />
             <Text style={styles.label}>Password</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Password"
+                onChangeText={text => setPassword(text)}
                 secureTextEntry
             />
-            <Pressable>
+            <Pressable onPress={() => {
+                if (username === "" && password === "") {
+                    return;
+                }
+                // Register the user with the API
+                register(username, password).then((response) => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        setSuccess(true);
+                        navigation.navigate('Home');
+                    }
+                }).catch(error => {
+                    if (error.response.status === 409) {
+                        setSuccess(false);
+                    }
+                });
+            }}>
                 <View style={{...ButtonStyles.button, ...ContainerStyles.spaced}}>
                     <Text style={ButtonStyles.buttonText}>Sign Up</Text>
                 </View>
             </Pressable>
+            <Pressable onPress={() => navigation.navigate('Login')}>
+                <View style={{...ButtonStyles.button}}>
+                    <Text style={ButtonStyles.buttonText}>Already have an account?</Text>
+                </View>
+            </Pressable>
+
+            { success === false && 
+            <Text style={ColorStyles.error}>
+                Username already exists.
+            </Text>
+            }
         </View>
 
     </SafeAreaView>

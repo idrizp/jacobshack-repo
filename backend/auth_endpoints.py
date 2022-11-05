@@ -17,7 +17,7 @@ def login():
     return jsonify({ "token": result }), 200
     
 
-@app.route("/login", methods=["POST"])
+@app.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
     username = data["username"]

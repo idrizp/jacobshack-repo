@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import Home from "./screens/Home";
+import Login from "./screens/Login";
 import Register from "./screens/Register";
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
   const routes = [
     { name: "Home", component: Home },
     { name: "Register", component: Register },
+    { name: "Login", component: Login },
   ];
 
   return (
