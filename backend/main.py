@@ -9,7 +9,7 @@ persons = [
 ]
 
 leaderboard = [
-    {"page": page, "persons": person}
+    {"page": page, "persons": persons}
 ]
 
 @app.route("/leaderboard/{page}")
