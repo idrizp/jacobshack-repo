@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 page = 1
 
-person = [
+persons = [
     {"name": "userName", "points": 100}
 ]
 
@@ -13,11 +13,11 @@ leaderboard = [
 ]
 
 @app.route("/leaderboard/{page}")
-def get_leaderbaord():
+def get_leaderboard():
     return jsonify(leaderboard)
 
 @app.route("/leaderboard", methods=['POST'])
-def add_leaderbaord():
+def add_leaderboard():
 
     persons.append(request.get_json())
 
