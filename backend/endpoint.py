@@ -1,8 +1,7 @@
 from flask import Flask, jsonify
 from leaderboard import leaderboard
 from barcode import score
-
-app = Flask(__name__)
+from main import app
 
 @app.route("/leaderboard/<int:page>")
 def get_leaderboard_page(page):
