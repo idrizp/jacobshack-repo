@@ -1,6 +1,9 @@
-from flask import Flask, g, request
+from flask import Flask, g, request, jsonify
+
+app = Flask(__name__)
 import auth_endpoints
 import endpoint
+import middleware.auth_middleware
 from db import db
 from barcode import checker
 
@@ -8,7 +11,7 @@ app = Flask(__name__)
 
 # done by: uncrownedking1
 # route to get a name and image as input
-@app.route("/leaderboard/entry", methods = 'POST')
+@app.route("/leaderboard/entry", methods = ['POST'])
 def entry():
     # getting input with image = image in HTML form
     image = request.files.get("image")

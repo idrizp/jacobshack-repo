@@ -41,3 +41,11 @@ def login(username: str, password: str, connection: Connection) -> str | None:
         }, 
         JWT_SECRET, 
         algorithm="HS256")
+
+def get_user(token: str) -> User | None:
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=["HS256"])
+        return User(payload["user_id"], payload["username"], None)
+    except:
+        return None
+
