@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, g
 
 app = Flask(__name__)
 
@@ -22,3 +22,12 @@ def add_leaderboard():
     persons.append(request.get_json())
 
     return '', 204
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello World!</p>"
