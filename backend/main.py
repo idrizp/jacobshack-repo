@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, g
+import auth_endpoints
 
 app = Flask(__name__)
 
