@@ -7,7 +7,7 @@ pressing ctrl+p and then type >Python: Select Interpreter and select the one tha
 a (env) in it.
 
 Afterward, create a new terminal(it should automatically use the python environment) and run
-pip install requirements.txt
+pip install -r requirements.txt
 
 This will install all the necessary dependencies for the project
 
