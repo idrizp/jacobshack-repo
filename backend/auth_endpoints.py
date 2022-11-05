@@ -3,7 +3,7 @@ from db import db
 from flask import request, jsonify
 from auth import auth
 
-@app.route("/login", methods="POST")
+@app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
     username = data["username"]
@@ -17,7 +17,7 @@ def login():
     return jsonify({ "token": result }), 200
     
 
-@app.route("/login", methods="POST")
+@app.route("/login", methods=["POST"])
 def register():
     data = request.get_json()
     username = data["username"]
