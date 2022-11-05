@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request, g
 import auth_endpoints
 import endpoint
+from db import db
+from barcode import checker
 
 app = Flask(__name__)
 
@@ -8,12 +10,13 @@ app = Flask(__name__)
 # route to get a name and image as input
 @app.route("/leaderboard/entry", methods = 'POST')
 def entry():
-    # getting input with name = name in HTML form
-    name = request.form.get("name")
     # getting input with image = image in HTML form
     image = request.files.get("image")
-    # returning name and image side-by-side
-    return name + image
+    # calling the save_barcode() from check and using it 
+    if checker.save_barcode(user_id, image, db.get_db()):
+        return jsonify({"success": "You have successfully added an entry."}), 200
+    return jsonify({ "error": "Couldn't accept barcode." }), 400
+
 
 @app.teardown_appcontext
 def close_connection(exception):
