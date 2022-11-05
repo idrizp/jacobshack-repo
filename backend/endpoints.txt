@@ -1,0 +1,29 @@
+GET:
+    /leaderboard/{page} - returns the current leaderboard by index and position as JSON
+        {
+            "page": page,
+            "persons": [
+                {
+                    "name": "Name",
+                    "points": 100
+                },
+                {
+                    "name": "Name",
+                    "points": 100
+                },
+                {
+                    "name": "Name",
+                    "points": 100
+                }
+                {
+                    "name": "Name",
+                    "points": 100
+                }
+            ]
+        }
+
+POST:
+    /leaderboard/entry
+        as form-data
+            name: "Name",
+            image: Image
