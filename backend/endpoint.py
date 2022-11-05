@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from leaderboard import leaderboard
-from score import get_score
+from barcode import get_score
 
 app = Flask(__name__)
 
