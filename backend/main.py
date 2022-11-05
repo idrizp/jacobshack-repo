@@ -15,6 +15,8 @@ leaderboard = [
 
 @app.route("/leaderboard")
 def get_leaderboard():
+@app.route("/leaderboard/<page>")
+def get_leaderboard(page):
     return jsonify(leaderboard)
 
 # done by: uncrownedking1
