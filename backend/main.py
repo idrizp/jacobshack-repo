@@ -17,7 +17,6 @@ def get_leaderboard():
     return jsonify(leaderboard)
 
 
-
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
