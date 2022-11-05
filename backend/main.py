@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, g
+from flask import Flask, g, request
 import auth_endpoints
 import endpoint
 from db import db
