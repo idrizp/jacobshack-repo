@@ -21,11 +21,12 @@ def get_leaderboard():
 # route to get a name and image as input
 @app.route("/leaderboard/entry", methods = 'POST')
 def entry():
-    # getting input with name = fname in HTML form
+    # getting input with name = name in HTML form
     name = request.form.get("name")
-    # getting input with name = lname in HTML form
+    # getting input with image = image in HTML form
     image = request.files.get("image")
-    return "Your name is "+ name + image
+    # returning name and image side-by-side
+    return name + image
 
 @app.teardown_appcontext
 def close_connection(exception):
