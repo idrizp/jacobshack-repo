@@ -7,6 +7,9 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 const Register = () => {
   return (
     <SafeAreaView style={styles.background}>
+        <View style={styles.container}>
+            <Text style={styles.title}>Sign into your account.</Text>
+        </View>
 
         <View style={
             {
@@ -15,9 +18,6 @@ const Register = () => {
                 ...ContainerStyles.full,
             }
         }>
-            <View style={styles.container}>
-                <Text style={styles.title}>Create an account.</Text>
-            </View>
             <Text style={styles.label}>Username</Text>
             <TextInput
                 style={styles.input}
@@ -33,7 +33,7 @@ const Register = () => {
             />
             <Pressable>
                 <View style={{...ButtonStyles.button, ...ContainerStyles.spaced}}>
-                    <Text style={ButtonStyles.buttonText}>Sign Up</Text>
+                    <Text style={ButtonStyles.buttonText}>Log In</Text>
                 </View>
             </Pressable>
         </View>

@@ -3,6 +3,7 @@ from flask import Flask, g, request, jsonify
 app = Flask(__name__)
 import auth_endpoints
 import endpoint
+import middleware.auth_middleware
 
 # done by: uncrownedking1
 # route to get a name and image as input

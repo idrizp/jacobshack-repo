@@ -3,6 +3,7 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 import { ButtonStyles } from '../styles/ButtonStyles';
+import { ContainerStyles } from '../styles/ContainerStyles';
 
 const Home = () => {
     const navigation = useNavigation();
@@ -13,7 +14,7 @@ const Home = () => {
           <Text style={styles.description}>
             To get started, create an account on our platform.
           </Text>
-          <View style={{ ...styles.row, ...styles.spaced }}>
+          <View style={{ ...styles.row, ...ContainerStyles.spaced }}>
             <Pressable style={ButtonStyles.button} 
                 onPress={() => navigation.navigate('Register')}
             >
@@ -66,10 +67,6 @@ const styles = StyleSheet.create({
     // A row style
     row: {
       flexDirection: "row",
-    },
-    // A space-between style
-    spaced: {
-      marginTop: 12,
     },
     // A logo container style
     logoContainer: {
