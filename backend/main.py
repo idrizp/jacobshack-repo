@@ -1,24 +1,19 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 page = 1
 
-person = [
-    {"name": "userName", "points": 100}
+persons = [
+    {'name' : 'name', 'points' : 100}
 ]
 
 leaderboard = [
-    {"page": page, "persons": person}
+    {'page' : page, 'persons' : persons}
 ]
 
-@app.route("/leaderboard/{page}")
-def get_leaderbaord():
+@app.route("/leaderboard")
+def get_leaderboard():
     return jsonify(leaderboard)
 
-@app.route("/leaderboard", methods=['POST'])
-def add_leaderbaord():
 
-    persons.append(request.get_json())
-
-    return '', 204
