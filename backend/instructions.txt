@@ -1,0 +1,15 @@
+First, run
+
+python3 -m venv env
+
+Afterward, use the interpreter by installing the Python extension in vscode and 
+pressing ctrl+p and then type >Python: Select Interpreter and select the one that has
+a (env) in it.
+
+Afterward, create a new terminal(it should automatically use the python environment) and run
+pip install requirements.txt
+
+This will install all the necessary dependencies for the project
+
+Now you can run the app with 
+flask --app main run
