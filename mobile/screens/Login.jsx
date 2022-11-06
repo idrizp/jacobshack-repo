@@ -45,11 +45,12 @@ const Login = () => {
                 if (username === "" && password === "") {
                     return;
                 }
-                logIn(username, password).then(async (response) => {
+                logIn(username, password).then((response) => {
                     if (response.status === 200) {
                         setSuccess(true);
-                        await AsyncStorage.setItem("token", response.data.token);
-                        navigation.navigate('Home');
+                        AsyncStorage.setItem("token", response.data.token, () => {
+                            navigation.push('Home');
+                        });
                     }
                 }).catch(error => {
                     if (error.response.status === 401) {
@@ -61,7 +62,7 @@ const Login = () => {
                     <Text style={ButtonStyles.buttonText}>Sign In</Text>
                 </View>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('Register')}>
+            <Pressable onPress={() => navigation.push('Register', {})}>
                 <View style={{...ButtonStyles.button}}>
                     <Text style={ButtonStyles.buttonText}>Don't have an account?</Text>
                 </View>

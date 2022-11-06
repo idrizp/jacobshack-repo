@@ -7,8 +7,8 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import { useAuth } from '../hooks/useAuth';
 import MainView from './MainView';
 
-const Home = () => {
-    const authenticated = useAuth();
+const Home = ({ router }) => {
+    const authenticated = useAuth(router);
     const navigation = useNavigation();
     
     if (authenticated) {
@@ -23,12 +23,12 @@ const Home = () => {
           </Text>
           <View style={{ ...styles.row, ...ContainerStyles.spaced }}>
             <Pressable style={ButtonStyles.button} 
-                onPress={() => navigation.navigate('Register')}
+                onPress={() => navigation.navigate('Register', {})}
             >
               <Text style={ButtonStyles.buttonText}>Sign Up</Text>
             </Pressable>
             <Pressable style={ButtonStyles.button}
-             onPress={() => navigation.navigate('Login')}
+             onPress={() => navigation.navigate('Login', {})}
             >
               <Text style={ButtonStyles.buttonText}>Sign In</Text>
             </Pressable>

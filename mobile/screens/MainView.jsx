@@ -8,6 +8,8 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import { TextStyles } from '../styles/TextStyles';
 import { sendBarcodeData } from '../api/score';
 import { usePoints } from '../hooks/usePoints';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Message = ({ message, children }) => {
     return <View style={{...ContainerStyles.centered, ...ContainerStyles.full}}>
@@ -16,12 +18,13 @@ const Message = ({ message, children }) => {
     </View>
 }
 
-const MainView = () => {
+const MainView = ({ route }) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [success, setSuccess] = useState(false); 
-    const points = usePoints();
+    const navigation = useNavigation();
+    const points = usePoints(route);
 
     useEffect(() => {
       const getBarCodeScannerPermissions = async () => {
@@ -78,6 +81,7 @@ const MainView = () => {
 
         { !scanned && <BarCodeScanner
           onBarCodeScanned={handleBarCodeScanned}
+          barCodeTypes={["aztec", "qr", "codabar"]}
           style={{
             flex: 1,
             backgroundColor: "black",
@@ -95,16 +99,23 @@ const MainView = () => {
             }
             <View style={{
                 flexDirection: "column",
-                flex: 0.135,
             }}>
                 <Text style={{...TextStyles.text}}>You have {points} points.</Text>
                 <Pressable style={{
                     ...ButtonStyles.button,
-                    flex: 1,
                 }} onPress={() => {
-                    
+                    navigation.navigate('Leaderboard', {});
                 }}>
-                    <Text style={TextStyles.text}>View Leaderboard</Text>
+                    <Text style={ButtonStyles.buttonText}>View Leaderboard</Text>
+                </Pressable>
+                <Pressable style={{
+                    ...ButtonStyles.button,
+                }} onPress={() => {
+                    AsyncStorage.removeItem("token", () => {
+                        navigation.push('Home', {});
+                    });
+                }}>
+                    <Text style={ButtonStyles.buttonText}>Log Out</Text>
                 </Pressable>
             </View>
           <StatusBar style="dark" />

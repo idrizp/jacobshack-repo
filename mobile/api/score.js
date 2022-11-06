@@ -6,6 +6,10 @@ export async function sendBarcodeData(data) {
   });
 }
 
+export async function getTopScores(page = 1) {
+  return authenticatedApi.get(`/leaderboard/${page}`);
+}
+
 export async function getScore() {
   return authenticatedApi.get("/me");
 }

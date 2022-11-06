@@ -5,6 +5,7 @@ import { ButtonStyles } from '../styles/ButtonStyles';
 import { register } from '../api/authentication';
 import { useNavigation } from '@react-navigation/native';
 import { ColorStyles } from '../styles/ColorStyles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -48,7 +49,9 @@ const Register = () => {
                     console.log(response);
                     if (response.status === 200) {
                         setSuccess(true);
-                        navigation.navigate('Home');
+                        AsyncStorage.setItem("token", response.data.token, () => {
+                            navigation.navigate('Home', {});
+                        });
                     }
                 }).catch(error => {
                     if (error.response.status === 409) {
@@ -60,7 +63,7 @@ const Register = () => {
                     <Text style={ButtonStyles.buttonText}>Sign Up</Text>
                 </View>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('Login')}>
+            <Pressable onPress={() => navigation.navigate('Login', {})}>
                 <View style={{...ButtonStyles.button}}>
                     <Text style={ButtonStyles.buttonText}>Already have an account?</Text>
                 </View>

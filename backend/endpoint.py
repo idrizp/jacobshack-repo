@@ -6,7 +6,9 @@ from db.db import get_db
 
 @app.route("/leaderboard/<int:page>")
 def get_leaderboard_page(page):
-    return jsonify({ "page" : page, "persons" : leaderboard.get_top_scores(page - 1, get_db()) }), 200
+    persons = leaderboard.get_top_scores(get_db(), page - 1)
+    print(persons)
+    return jsonify({ "page" : page, "persons" :  persons}), 200
 
 @app.route("/me")
 def get_leaderboard_score():
