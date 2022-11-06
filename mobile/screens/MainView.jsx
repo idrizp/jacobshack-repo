@@ -47,6 +47,8 @@ const MainView = ({ route }) => {
         setProcessing(false);
       }).finally(() => {
         setTimeout(() => {
+            setProcessing(false);
+            setSuccess(false);
             setScanned(false);
         }, 2000)
       });
@@ -104,7 +106,7 @@ const MainView = ({ route }) => {
                 <Pressable style={{
                     ...ButtonStyles.button,
                 }} onPress={() => {
-                    navigation.navigate('Leaderboard', {});
+                    navigation.push('Leaderboard');
                 }}>
                     <Text style={ButtonStyles.buttonText}>View Leaderboard</Text>
                 </Pressable>
@@ -112,7 +114,7 @@ const MainView = ({ route }) => {
                     ...ButtonStyles.button,
                 }} onPress={() => {
                     AsyncStorage.removeItem("token", () => {
-                        navigation.push('Home', {});
+                        navigation.push('Home');
                     });
                 }}>
                     <Text style={ButtonStyles.buttonText}>Log Out</Text>

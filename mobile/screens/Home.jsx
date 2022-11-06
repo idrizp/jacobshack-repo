@@ -23,12 +23,12 @@ const Home = ({ router }) => {
           </Text>
           <View style={{ ...styles.row, ...ContainerStyles.spaced }}>
             <Pressable style={ButtonStyles.button} 
-                onPress={() => navigation.navigate('Register', {})}
+                onPress={() => navigation.push('Register')}
             >
               <Text style={ButtonStyles.buttonText}>Sign Up</Text>
             </Pressable>
             <Pressable style={ButtonStyles.button}
-             onPress={() => navigation.navigate('Login', {})}
+             onPress={() => navigation.push('Login')}
             >
               <Text style={ButtonStyles.buttonText}>Sign In</Text>
             </Pressable>

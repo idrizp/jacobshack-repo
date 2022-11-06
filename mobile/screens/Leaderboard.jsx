@@ -30,9 +30,7 @@ const Leaderboard = () => {
         {leaderboard.map((person, index) => {
             return <View key={index} style={{
                 flexDirection: "row",
-                backgroundColor: "#27ae60",
-                // borderColor: "#0a6b33",
-                // borderWidth: 3,
+                backgroundColor: index != 0 ? "#27ae60" : "#fff563",
                 margin: 10,
                 borderRadius: 10,
                 justifyContent: "space-between",
@@ -40,12 +38,12 @@ const Leaderboard = () => {
                 alignItems: "center",
             }}>
                 <Text style={{
-                    color: "#fff",
+                    color: index != 0 ? "#fff" : "#000",
                     fontSize: 20,
                     fontWeight: "bold",
-                }}>{person.username}</Text>
+                }}>{`${person.username} ${index === 0 ? "👑" : ""}`}</Text>
                 <Text style={{
-                    color: "#089e46",
+                    color: index != 0 ? "#089e46" : "#000",
                     backgroundColor: "#FFF",
                     fontSize: 20,
                     padding: 10,

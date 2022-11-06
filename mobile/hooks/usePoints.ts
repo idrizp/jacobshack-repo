@@ -7,12 +7,24 @@ export function usePoints(route) {
   const [points, setPoints] = useState(-1);
   const authenticated = useAuth(route);
   useEffect(() => {
-    if (!authenticated) {
-      return;
-    }
-    getScore().then((res) => {
-      setPoints(res.data.points);
-    });
+    const reload = () => {
+      if (!authenticated) {
+        return;
+      }
+      getScore()
+        .then((res) => {
+          setPoints(res.data.points);
+        })
+        .catch((err) => {
+          throw err;
+        });
+    };
+
+    reload();
+    const timer = setInterval(() => {
+      reload();
+    }, 1000);
+    return () => clearInterval(timer);
   }, [authenticated, route]);
   return points;
 }

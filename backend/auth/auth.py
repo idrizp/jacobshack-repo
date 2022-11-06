@@ -21,8 +21,8 @@ def create_user(username: str, password: str, connection: Connection) -> Tuple[U
             id = db.query_db(connection, "INSERT INTO users(username, password) VALUES (?, ?) RETURNING user_id", (
                 username, 
                 hashed_password
-            ), one=True)
-            
+            ), one=True)[0]
+
             token = jwt.encode({"username": username, "user_id": id}, JWT_SECRET, algorithm="HS256")
             return (User(id, username, password), token)
         except IntegrityError:

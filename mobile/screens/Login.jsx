@@ -53,6 +53,8 @@ const Login = () => {
                         });
                     }
                 }).catch(error => {
+                    console.log("Haha");
+                    console.log(error);
                     if (error.response.status === 401) {
                         setSuccess(false);
                     }
@@ -62,7 +64,7 @@ const Login = () => {
                     <Text style={ButtonStyles.buttonText}>Sign In</Text>
                 </View>
             </Pressable>
-            <Pressable onPress={() => navigation.push('Register', {})}>
+            <Pressable onPress={() => navigation.push('Register')}>
                 <View style={{...ButtonStyles.button}}>
                     <Text style={ButtonStyles.buttonText}>Don't have an account?</Text>
                 </View>

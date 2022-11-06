@@ -41,19 +41,22 @@ const Register = () => {
                 secureTextEntry
             />
             <Pressable onPress={() => {
+                console.log("Hi");
                 if (username === "" && password === "") {
                     return;
                 }
+                console.log(username, password);
                 // Register the user with the API
                 register(username, password).then((response) => {
                     console.log(response);
                     if (response.status === 200) {
                         setSuccess(true);
                         AsyncStorage.setItem("token", response.data.token, () => {
-                            navigation.navigate('Home', {});
+                            navigation.push('Home');
                         });
                     }
                 }).catch(error => {
+                    console.log(error);
                     if (error.response.status === 409) {
                         setSuccess(false);
                     }
