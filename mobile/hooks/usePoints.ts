@@ -16,7 +16,7 @@ export function usePoints(route) {
           setPoints(res.data.points);
         })
         .catch((err) => {
-          throw err;
+          console.log(err);
         });
     };
 

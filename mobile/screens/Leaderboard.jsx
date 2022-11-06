@@ -41,7 +41,7 @@ const Leaderboard = () => {
                     color: index != 0 ? "#fff" : "#000",
                     fontSize: 20,
                     fontWeight: "bold",
-                }}>{`${person.username} ${index === 0 ? "👑" : ""}`}</Text>
+                }}>{`${index + 1}. ${person.username} ${index === 0 ? "👑" : ""}`}</Text>
                 <Text style={{
                     color: index != 0 ? "#089e46" : "#000",
                     backgroundColor: "#FFF",

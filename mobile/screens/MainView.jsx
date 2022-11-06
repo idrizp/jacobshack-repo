@@ -94,15 +94,18 @@ const MainView = ({ route }) => {
                <Message message="Your code is being processed..." />: 
 
             success ?
-                <Message message={`Code successfully redeemed. You now have ${points + 1} points.`}/> 
+                <Message message={`Code successfully redeemed. You now have ${points} points.`}/> 
                 :
                 <Message message="That code is invalid. Please try again."/>
             )
             }
             <View style={{
                 flexDirection: "column",
+                padding: 10,
             }}>
-                <Text style={{...TextStyles.text}}>You have {points} points.</Text>
+                <Text style={{...TextStyles.text, ...{
+                    paddingVertical: 10,
+                }}}>You have {points} points.</Text>
                 <Pressable style={{
                     ...ButtonStyles.button,
                 }} onPress={() => {
