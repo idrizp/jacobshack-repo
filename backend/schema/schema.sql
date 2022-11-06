@@ -13,5 +13,5 @@ CREATE TABLE users(
 );
 
 CREATE UNIQUE INDEX users_username ON users(username);
-CREATE INDEX used_barcodes_barcode_hash ON used_barcodes(barcode_hash);
+CREATE UNIQUE INDEX used_barcodes_barcode_hash ON used_barcodes(barcode_hash);
 CREATE INDEX used_barcodes_user_id ON used_barcodes(user_id);

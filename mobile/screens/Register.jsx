@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, SafeAreaView, TextInput, Pressable } from 'reac
 import React, { useState } from 'react'
 import { ContainerStyles } from '../styles/ContainerStyles';
 import { ButtonStyles } from '../styles/ButtonStyles';
-import {  } from '../api/request';
 import { register } from '../api/authentication';
 import { useNavigation } from '@react-navigation/native';
 import { ColorStyles } from '../styles/ColorStyles';

@@ -4,9 +4,16 @@ import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 import { ButtonStyles } from '../styles/ButtonStyles';
 import { ContainerStyles } from '../styles/ContainerStyles';
+import { useAuth } from '../hooks/useAuth';
+import MainView from './MainView';
 
 const Home = () => {
+    const authenticated = useAuth();
     const navigation = useNavigation();
+    
+    if (authenticated) {
+      return <MainView />
+    }
     return (
         <View style={styles.container}>
           <Text style={styles.title}>Welcome to GreenBoard.</Text>
@@ -26,7 +33,7 @@ const Home = () => {
               <Text style={ButtonStyles.buttonText}>Sign In</Text>
             </Pressable>
           </View>
-          <StatusBar style="light" />
+          <StatusBar style="dark" />
         </View>
       );
 }

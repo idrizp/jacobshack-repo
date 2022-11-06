@@ -17,7 +17,16 @@ export default function App() {
   return (
     // Hide the navigation container's status bar
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "green",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
+        }}
+      >
         {routes.map((route, index) => (
           <Stack.Screen
             key={index}

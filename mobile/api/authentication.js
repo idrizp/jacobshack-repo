@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { api } from "./request";
 
 export async function logIn(username, password) {
@@ -12,4 +13,8 @@ export async function register(username, password) {
     username,
     password,
   });
+}
+
+export async function isAuthenticated() {
+  return (await AsyncStorage.getItem("token")) != null;
 }

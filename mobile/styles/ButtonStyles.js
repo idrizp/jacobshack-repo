@@ -10,6 +10,7 @@ export const ButtonStyles = StyleSheet.create({
   },
   // A button text style
   buttonText: {
+    textAlign: "center",
     color: "#27ae60",
     fontSize: 14,
     fontWeight: "bold",

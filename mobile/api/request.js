@@ -7,7 +7,7 @@ export async function getToken() {
   return token;
 }
 
-const baseUrl = "http://127.0.0.1:5000";
+const baseUrl = "http://192.168.137.223:3232";
 
 export const api = axios.create({
   baseURL: baseUrl,
@@ -38,6 +38,6 @@ authenticatedApi.interceptors.response.use(
       const navigation = useNavigation();
       navigation.navigate("Login");
     }
-    return error;
+    return Promise.reject(error);
   }
 );
